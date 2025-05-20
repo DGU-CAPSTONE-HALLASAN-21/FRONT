@@ -1,0 +1,141 @@
+/* 전체 페이지 세로 배치 */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* ✅ footer가 아래 붙도록 전체 높이 고정 */
+  width: 100%;
+}
+
+/* 헤더 */
+.header {
+  background-color: #EEEEEE;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  width: 20%;
+}
+
+.headerContent {
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  height: 4rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* 푸터: 항상 아래 고정 */
+.footer {
+  color: black;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  width: 100%;
+  margin: 0;
+  font-size: 0.5rem;
+  flex-shrink: 0; /* ✅ 줄어들지 않게 */
+}
+
+/* 중앙 레이아웃 (사이드바 + 본문) */
+.contentArea {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  overflow: hidden; /* ✅ 스크롤 발생 방지 */
+}
+
+/* 사이드바 */
+.sideNavbar {
+  background-color: #EEEEEE;
+  width: 20%;
+  min-width: 180px;
+  height: 100%;                 /* ✅ 부모 영역 기준으로 높이 채움 */
+  flex-shrink: 0;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  overflow-y: auto;             /* ✅ 세로 스크롤 활성화 */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* 메인 콘텐츠 */
+.mainContent {
+  flex: 1;
+  padding: 0 2rem 0 2rem;
+  box-sizing: border-box;
+  overflow-y: auto;  /* ✅ 여기가 스크롤 발생 지점 */
+}
+
+/* 사이드바 항목들 */
+.sidebarItem {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+}
+
+.sidebarLink {
+  text-decoration: none;
+  color: rgb(102, 102, 102);
+  padding: 0.5rem;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebarLink:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+
+.sidebarHeader {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end; /* ✅ 오른쪽 정렬 */
+  padding: 0 1rem;
+}
+
+.sidebarScrollArea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sendButton {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.sendIcon {
+  width: 24px;
+  height: 24px;
+  outline: none;
+  border: none;
+  user-select: none;
+}
+
+.sendButton:hover .sendIcon {
+  opacity: 0.7;
+}
+
+
+.sendButton:focus,
+.sendButton:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none; /* 크롬에서는 버튼에 그림자 생기는 경우도 있음 */
+}
