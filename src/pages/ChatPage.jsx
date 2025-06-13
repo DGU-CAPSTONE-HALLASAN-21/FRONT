@@ -79,12 +79,12 @@ function ChatPage() {
       const idx = full.indexOf(trimmed);
       // 2) 그 뒤 부분만 잘라내기
       const suffix = idx >= 0 ? full.slice(idx + trimmed.length) : full;
-     // 1) 제안 문자열 앞뒤 공백을 trim 하고
- const pure = suffix.trimStart();
- // 2) 모든 공백을 non-breaking space로 치환 → 줄바꿈 기준 무시
- const noWrap = pure.replace(/ /g, '\u00A0');
- // (중요!) 여기 한 번만 호출해서 반드시 NBSP 치환된 문자열을 셋팅
- setSuggestion(noWrap);
+      // 1) 제안 문자열 앞뒤 공백을 trim 하고
+      const pure = suffix.trimStart();
+      // 2) 모든 공백을 non-breaking space로 치환 → 줄바꿈 기준 무시
+      const noWrap = pure.replace(/ /g, "\u00A0");
+      // (중요!) 여기 한 번만 호출해서 반드시 NBSP 치환된 문자열을 셋팅
+      setSuggestion(noWrap);
     } catch (err) {
       console.error("Autocomplete error:", err);
       setSuggestion("");
