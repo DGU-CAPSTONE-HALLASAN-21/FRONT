@@ -5,31 +5,6 @@
   padding: 1rem;
 }
 
-.boxGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.box {
-  border-radius: 30px;
-  border: 0.001rem solid #000;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.box h5 {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.box p {
-  font-size: 0.7rem;
-  line-height: 1.4;
-  margin: 0;
-}
-
 .messageList {
   flex-grow: 1;
   display: flex;
@@ -37,61 +12,100 @@
   gap: 0.5rem;
   overflow-y: auto;
   padding-bottom: 1rem;
+  flex: 1 1 auto;        /* 남은 공간 차지 */
 }
 
 .message {
-  align-self: flex-end;          /* ✅ 오른쪽 정렬 (부모가 flex-direction: column일 때) */
-  background-color: #EEEEEE;     /* WhatsApp 스타일 연두색 배경 */
+  align-self: flex-end; /* ✅ 오른쪽 정렬 (부모가 flex-direction: column일 때) */
+  background-color: #eeeeee; /* WhatsApp 스타일 연두색 배경 */
   padding: 0.8rem 1rem;
   border-radius: 1rem;
-  max-width: 70%;               /* ✅ 너무 긴 경우 자동 줄바꿈 */
-  width: fit-content;           /* ✅ 텍스트 길이에 맞게 너비 조절 */
-  word-break: break-word;       /* ✅ 긴 단어 줄바꿈 */
+  max-width: 70%; /* ✅ 너무 긴 경우 자동 줄바꿈 */
+  width: fit-content; /* ✅ 텍스트 길이에 맞게 너비 조절 */
+  word-break: break-word; /* ✅ 긴 단어 줄바꿈 */
   font-size: 0.7rem;
 }
 
+.userMessage,
+.botMessage {
+  display: inline-block;
+  max-width: 70%;
+  width: fit-content; /* 텍스트 길이에 맞게 너비 조절 */
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 2rem;
+  font-size: 0.7rem;
+}
+
+/* 오른쪽: 사용자 메시지 (회색 배경) */
+.userMessage {
+  background-color: #f0f0f0;
+  color: #333;
+  align-self: flex-end;
+}
+
+/* 왼쪽: 봇(백엔드) 메시지 (흰색 배경) */
+.botMessage {
+  background-color: #ffffff;
+  color: #000;
+  align-self: flex-start;
+  border: 1px solid #e0e0e0;
+}
+
+/* ChatPage.module.css */
+
+/* 봇 메시지 영역 안의 모든 테이블에 적용 */
+.botMessage table {
+  width: 100%;
+  border-collapse: collapse; /* 줄 간격 없이 딱 붙여줌 */
+  margin: 1rem 0;
+}
+
+/* 테이블, 헤더, 셀에 실선 테두리 추가 */
+.botMessage table,
+.botMessage th,
+.botMessage td {
+  border: 1px solid #ccc;
+}
+
+/* 헤더(칼럼 제목) 스타일 */
+.botMessage th {
+  padding: 0.5rem;
+  background-color: #f7f7f7;
+  text-align: left;
+}
+
+/* 데이터 셀 스타일 */
+.botMessage td {
+  padding: 0.5rem;
+}
+
+/* 선택적으로 홀수/짝수 행에 배경색을 달리 줄 수도 있습니다 */
+.botMessage tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+
 .inputArea {
+  flex: 0 0 auto;        /* 높이 고정 */
+  height: 60px;          /* 원하는 고정 높이 (예: 60px) */
   display: flex;
-  margin-top: auto;
-  padding-top: 1rem;
+  align-items: flex-start;
   border-top: 1px solid #ddd;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  background: #fff;
 }
 
-input{
-  border: none;
-  margin-left: 1rem;
-  margin-right: 1.5rem;
-  width: 90%;
-}
-
-input:focus {
-  outline: none;
-}
-
-
-.titleRow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.boxImage {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-}
 
 .sendButton {
-  align-items: flex-end;
   background: none;
   border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  margin-right: 1rem;
   cursor: pointer;
-  display: flex;
+  align-items: center;
+  /* 필요하다면 padding/margin 여기서 추가 */
 }
 
 .sendIcon {
@@ -112,3 +126,244 @@ input:focus {
   border: none;
   box-shadow: none; /* 크롬에서는 버튼에 그림자 생기는 경우도 있음 */
 }
+
+.suggestion {
+  color: #a0a0a0; /* 연한 회색 */
+}
+
+/* 카테고리 버튼 기본 */
+.categoryBar .categoryButton {
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 15px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  outline: none; /* focus outline 제거 */
+}
+
+.categoryBar {
+  display: flex; /* Flex 컨테이너 */
+  flex: 0 0 auto;        /* 높이 고정 */
+  height: 20px;          /* 원하는 고정 높이 (예: 60px) */
+  flex-direction: row; /* 가로 정렬 */
+  flex-wrap: nowrap; /* 한 줄에서 넘치면 넘치도록(스크롤) */
+  gap: 0.5rem; /* 버튼 간격 */
+  overflow-x: auto; /* 가로 스크롤 허용 */
+  padding: 0 1rem; /* 좌우 여유 공간 */
+}
+.categoryButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.categoryIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* hover 시 */
+.categoryBar .categoryButton:hover {
+  border-color: #0f0191;
+}
+
+/* selected 상태 */
+.categoryBar .categoryButton.selected {
+  border: 1px solid #0f0191; /* 테두리 파란색 고정 */
+  color: #0f0191;
+  background: #eaf4ff; /* 선택된 느낌을 위해 연한 배경 추가 */
+}
+
+/* selected 버튼에 포커스 되었을 때도 동일하게 */
+.categoryBar .categoryButton.selected:focus {
+  outline: none;
+  border: 1px solid #0f0191;
+}
+
+/* ChatPage.module.css */
+
+/* 입력창 전체 래퍼 */
+.ghostWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.chatInput,
+.ghostInput {
+  width: 100%;
+  resize: none;           /* 사용자가 크기 조절 금지 */
+  overflow-x: hidden;     /* 가로 스크롤 금지 */
+  overflow-y: auto;       /* 세로 스크롤 허용 */
+  word-wrap: break-word;
+  box-sizing: border-box;
+  /* 줄바꿈/공백 처리 */
+  /* 1) break-spaces: 연속 공백을 유지하면서 일반 공백에서 줄바꿈 */
+  white-space: break-spaces;
+  /* 2) break-word: 단어가 영역을 넘칠 때 어딘가라도 잘라서 배치  */
+  overflow-wrap: break-word;
+  padding: 0.5rem 1rem;   /* 동일한 패딩 */
+  max-height: 40px;       /* inputArea 높이에 맞춘 최대 높이 */
+   scrollbar-gutter: stable;  /* 스크롤바가 생겨도 레이아웃이 흔들리지 않도록 여유 공간 확보 */
+}
+
+/* 3. 고스트 텍스트 */
+.ghostInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #aaa;
+  background: transparent;
+  border: none;
+  pointer-events: none;   /* 클릭·포커스 막기 */
+  z-index: 1;
+  padding: 0.5rem 1rem;    /* chatInput과 동일하게 */
+   font-family: inherit;    /* font: inherit 대신 */
+  font-size: 0.8rem;      /* font-size 상속 */
+     line-height: inherit;    /* line-height 상속 */
+     
+}
+
+/* 웹킷 브라우저에서 고스트 스크롤바 숨기기(선택) */
+.ghostInput::-webkit-scrollbar {
+  display: none;
+}
+
+/* 4. 실제 입력창 */
+.chatInput {
+  position: relative;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;    /* font: inherit 대신 */
+  font-size: 0.8rem;      /* font-size 상속 */
+     line-height: inherit;    /* line-height 상속 */
+
+
+}
+
+/* 가이드 라인 */
+.guideContainer {
+    flex: 0 0 auto;       /* 높이 고정(내용에 따라) */
+max-height: 220px;     /* 원하는 최대 높이 */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  position: relative;
+  /* height: auto; 또는 max-height: 300px; */
+  overflow: visible; /* 가이드 내용이 많아도 스크롤 없이 보이도록 */
+
+}
+
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 아이콘과 텍스트 사이 간격 */
+  font-weight: bold;
+}
+
+.guideHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: #fff;
+  border-bottom: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+
+.toggleIcon {
+  font-size: 0.8rem;
+  display: flex;
+  margin-left: auto;
+}
+
+.guideContent {
+  padding: 1rem;
+  border-radius: 6px;
+  padding-left: 10rem;
+  width: 100%;
+  /* 여기를 추가 */
+  max-height: 170px;      /* 원하는 높이만큼 제한 */
+  overflow-y: auto;       /* 세로 스크롤 허용 */
+}
+
+.guideContent h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 80%;
+}
+
+.guideContent p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.7rem;
+    width: 80%;
+
+}
+
+.guideIcon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.guideLine {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding-top: 0.7rem;
+}
+
+.guideLineIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+padding-top: 3px;}
+
+/* ChatPage.module.css */
+.guideLineFirst {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.5rem;
+  padding-left: 27px; /* 두 번째 줄은 왼쪽 여백 추가 */
+}
+
+.guideLineSecond {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-left: 27px; /* 두 번째 줄은 왼쪽 여백 추가 */
+    font-size: 0.5rem;
+
+  font-family: "Noto Sans KR", sans-serif; /* 한글 폰트 적용 */
+  background-color: bisque;
+  border-radius: 10px;
+}
+
+/* 빈 화면(아무 메시지 없을 때) 중앙 표시 */
+.emptyPlaceholder {
+  flex: 1;                      /* 공간 모두 채우기 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.placeholderIcon {
+  width: 3%;
+  margin-bottom: 0.5rem;
+}
+
+.placeholderText {
+  font-size: 1.2rem;
+}
+
